@@ -1,10 +1,10 @@
-const webpackConfig = require('./webpack.config.js');
-webpackConfig.mode = 'production';
+import webpackConfig from './webpack.config.js';
+mode = 'production';
 
-module.exports = function(config) {
+export default function (config) {
   config.set({
     singleRun: true,
-    
+
     browsers: [
       'PhantomJS'
     ],
