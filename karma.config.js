@@ -1,7 +1,7 @@
-import webpackConfig from './webpack.config.js';
-mode = 'production';
+const webpackConfig = require('./webpack.config.js');
+webpackConfig.mode = 'production';
 
-export default function (config) {
+module.exports = function (config) {
   config.set({
     singleRun: true,
 
