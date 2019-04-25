@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "vscode-icons-team.vscode-icons",
+    "formulahendry.auto-close-tag",
+    "eamodio.gitlens",
+    "WallabyJs.quokka-vscode",
+    "rbbit.typescript-hero",
+    "DSKWRK.vscode-generate-getter-setter",
+    "esbenp.prettier-vscode"
+  ]
+}
