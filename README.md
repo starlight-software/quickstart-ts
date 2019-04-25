@@ -1,6 +1,7 @@
 ## Webpack 4 + TypeScript + SCSS Quickstart
 
-[![Build Status](https://travis-ci.org/starlight-software/quickstart-ts.svg?branch=master)](https://travis-ci.org/starlight-software/quickstart-ts)
+[![Build Status](https://travis-ci.org/starlight-software/quickstart-ts.svg?branch=master)](https://travis-ci.org/starlight-software/quickstart-ts)  
+
 This is a simple quickstart template configured to make it painless to start a nwe project with
 TypeScript, SCSS, Webpack, and testing using Karma and Jasmine.
 
