@@ -15,7 +15,7 @@ module.exports = {
   entry: { main: './main.ts' },
 
   output: {
-    filename: 'main.js',
+    filename: '[name].[contenthash].js',
     path: DESTINATION,
   },
 
@@ -63,9 +63,9 @@ module.exports = {
   },
 
   plugins: [
-    // new CleanWebpackPlugin('dist', {}),
+    new CleanWebpackPlugin('dist', {}),
     new MiniCssExtractPlugin({
-      filename: 'style.css',
+      filename: '[name].[contenthash].css',
     }),
     new HtmlWebpackPlugin({
       inject: false,
