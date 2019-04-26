@@ -1,86 +1,83 @@
-const path = require('path');
-const webpack = require('webpack');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path')
+const webpack = require('webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const WebpackMd5Hash = require('webpack-md5-hash')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WebpackMd5Hash = require('webpack-md5-hash');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-
-const ROOT = path.resolve( __dirname, 'src' );
-const DESTINATION = path.resolve( __dirname, 'dist' );
+const ROOT = path.resolve(__dirname, 'src')
+const DESTINATION = path.resolve(__dirname, 'dist')
 
 module.exports = {
-    context: ROOT,
+  context: ROOT,
 
-    entry: { 'main': './main.ts' },
-    
-    output: {
-        filename: '[name].[contenthash].bundle.js',
-        path: DESTINATION
-    },
+  entry: { main: './main.ts' },
 
-    resolve: {
-        extensions: ['.ts', '.js', '.tsx', '.jsx'],
-        modules: [
-            ROOT,
-            'node_modules'
-        ]
-    },
+  output: {
+    filename: 'main.js',
+    path: DESTINATION,
+  },
 
-    module: {
-        rules: [
-            /****************
-            * PRE-LOADERS
-            *****************/
-            {
-                enforce: 'pre',
-                test: /\.jsx?$/,
-                use: 'source-map-loader'
-            },
-            {
-                enforce: 'pre',
-                test: /\.tsx?$/,
-                exclude: /node_modules/,
-                use: 'tslint-loader'
-            },
+  resolve: {
+    extensions: ['.ts', '.js', '.tsx', '.jsx', '.css'],
+    modules: [ROOT, 'node_modules'],
+  },
 
-            /****************
-            * LOADERS
-            *****************/
-            {
-                test: /\.tsx?$/,
-                exclude: [ /node_modules/ ],
-                use: 'awesome-typescript-loader'
-            },
-            {
-                test: /\.scss$/,
-                use: [
-                    'style-loader', 
-                    MiniCssExtractPlugin.loader, 
-                    'css-loader', 
-                    'postcss-loader', 
-                    'sass-loader'
-                ]
-              }
-        ]
-    },
+  module: {
+    rules: [
+      /****************
+       * PRE-LOADERS
+       *****************/
+      {
+        enforce: 'pre',
+        test: /\.jsx?$/,
+        use: 'source-map-loader',
+      },
+      {
+        enforce: 'pre',
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: 'tslint-loader',
+      },
 
-    plugins: [
-        new CleanWebpackPlugin('dist', {}),
-        new MiniCssExtractPlugin({
-          filename:  'style.[contenthash].css',
-        }),
-        new HtmlWebpackPlugin({
-          inject: false,
-          hash: true,
-          template: './index.html',
-          filename: 'index.html'
-        }),
-        new WebpackMd5Hash()
-      ],
+      /****************
+       * LOADERS
+       *****************/
+      {
+        test: /\.tsx?$/,
+        exclude: [/node_modules/],
+        use: 'awesome-typescript-loader',
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+        ],
+      },
+    ],
+  },
 
-    devtool: 'cheap-module-source-map',
-    devServer: {}
-};
+  plugins: [
+    // new CleanWebpackPlugin('dist', {}),
+    new MiniCssExtractPlugin({
+      filename: 'style.css',
+    }),
+    new HtmlWebpackPlugin({
+      inject: false,
+      hash: true,
+      template: './index.html',
+      filename: 'index.html',
+    }),
+    new WebpackMd5Hash(),
+  ],
 
+  devtool: 'cheap-module-source-map',
+  devServer: {
+    port: 9000,
+  },
+}
