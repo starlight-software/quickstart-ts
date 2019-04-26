@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackMd5Hash = require('webpack-md5-hash')
@@ -59,6 +60,34 @@ module.exports = {
           'sass-loader',
         ],
       },
+      // {
+      //   test: /\.(jpe?g|png|gif|svg)$/i,
+      //   /* Exclude fonts while working with images, e.g. .svg can be both image or font. */
+      //   exclude: path.resolve(__dirname, '../src/assets/fonts'),
+      //   use: [
+      //     {
+      //       loader: 'file-loader',
+      //       options: {
+      //         name: '[name].[ext]',
+      //         outputPath: 'dist/images/',
+      //       },
+      //     },
+      //   ],
+      // },
+      // {
+      //   test: /\.(woff(2)?|ttf|eot|svg|otf)(\?v=\d+\.\d+\.\d+)?$/,
+      //   /* Exclude images while working with fonts, e.g. .svg can be both image or font. */
+      //   exclude: path.resolve(__dirname, '../src/assets/images'),
+      //   use: [
+      //     {
+      //       loader: 'file-loader',
+      //       options: {
+      //         name: '[name].[ext]',
+      //         outputPath: 'dist/fonts/',
+      //       },
+      //     },
+      //   ],
+      // },
     ],
   },
 
@@ -74,6 +103,7 @@ module.exports = {
       filename: 'index.html',
     }),
     new WebpackMd5Hash(),
+    new CopyPlugin([{ from: '../src/assets/**/*', to: 'assets/' }]),
   ],
 
   devtool: 'cheap-module-source-map',
